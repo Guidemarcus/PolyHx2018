@@ -26,8 +26,8 @@ namespace LoginSystem
 
             // getting credentials
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-            "IDENTITY_POOL_ID",    // Cognito Identity Pool ID
-            RegionEndpoint.USEast1 // Region
+                "us-east-1:a205f4ac-4f87-49d6-b913-911e4eccb852",    // Cognito Identity Pool ID
+                RegionEndpoint.USEast1 // Region
             );
 
 
