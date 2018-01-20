@@ -40,8 +40,22 @@ namespace LoginSystem
             }
             );
 
+            // create local dataset
+            Dataset dataset = syncManager.OpenOrCreateDataset("omniwallet_user");
+
+            //Read in Dataset Do not use here, use where you need to read
+            string myValue = dataset.Get("myKey");
+
+            // Create a record in a dataset and synchronize with the server  Do not use here, use it when you need to save in cloud Database
+            dataset.OnSyncSuccess += SyncSuccessCallback;
+            dataset.Put("myKey", "myValue");
+            dataset.SynchronizeAsync();
+
+
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
 
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
@@ -73,6 +87,10 @@ namespace LoginSystem
 
             RunOnUiThread(() => { mProgressBar.Visibility = ViewStates.Invisible; });
             int x = Resource.Animation.slide_right;
+        }
+        void SyncSuccessCallback(object sender, SyncSuccessEventArgs e)
+        {
+            // Your handler code here
         }
     }
 }
