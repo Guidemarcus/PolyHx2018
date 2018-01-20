@@ -24,25 +24,24 @@ namespace LoginSystem
         {
             base.OnCreate(bundle);
 
+            // getting credentials
+            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
+            "IDENTITY_POOL_ID",    // Cognito Identity Pool ID
+            RegionEndpoint.USEast1 // Region
+            );
+
+
+            // creating syncmanager
+            CognitoSyncManager syncManager = new CognitoSyncManager(
+            credentials,
+            new AmazonCognitoSyncConfig
+            {
+            RegionEndpoint = RegionEndpoint.USEast1 // Region
+            }
+            );
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
-            /*CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-                "us-east-1:a205f4ac-4f87-49d6-b913-911e4eccb852", // Your identity pool ID
-                RegionEndpoint.USEast1 // Region
-            );
-            var loggingConfig = AWSConfigs.LoggingConfig;
-            loggingConfig.LogMetrics = true;
-            loggingConfig.LogResponses = ResponseLoggingOption.Always;
-            loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
-            loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
-
-            //location of the device running
-            AWSConfigs.AWSRegion = "us-east-1";
-            //time difference between 
-            AWSConfigs.CorrectForClockSkew = true;
-
-            CognitoSyncManager syncManager = new CognitoSyncManager(credentials, RegionEndpoint.USEast1);*/
 
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
