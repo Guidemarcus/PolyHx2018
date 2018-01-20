@@ -26,6 +26,10 @@ namespace LoginSystem
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLCrypto.Resource.String.ApplicationName = global::LoginSystem.Resource.String.ApplicationName;
+			global::PCLCrypto.Resource.String.Hello = global::LoginSystem.Resource.String.Hello;
+			global::PCLStorage.Resource.String.ApplicationName = global::LoginSystem.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::LoginSystem.Resource.String.Hello;
 		}
 		
 		public partial class Animation

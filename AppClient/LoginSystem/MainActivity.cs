@@ -6,6 +6,10 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.Threading;
+using Amazon;
+using Amazon.CognitoSync.SyncManager;
+using Amazon.CognitoSync;
+using Amazon.Auth.AccessControlPolicy;
 
 namespace LoginSystem
 {
@@ -14,6 +18,7 @@ namespace LoginSystem
     {
         private Button mBtnSignUp;
         private ProgressBar mProgressBar;
+        CognitoSyncManager syncManager = new CognitoSyncManager(credentials, RegionEndpoint.CACentral1);
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -21,6 +26,17 @@ namespace LoginSystem
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            var loggingConfig = AWSConfigs.LoggingConfig;
+            loggingConfig.LogMetrics = true;
+            loggingConfig.LogResponses = ResponseLoggingOption.Always;
+            loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
+            loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
+
+            //location of the device running
+            AWSConfigs.AWSRegion = "ca-central-1";
+            //time difference between 
+            AWSConfigs.CorrectForClockSkew = true;
 
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
