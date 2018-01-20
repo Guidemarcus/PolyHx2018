@@ -10,6 +10,7 @@ using Amazon;
 using Amazon.CognitoSync.SyncManager;
 using Amazon.CognitoSync;
 using Amazon.Auth.AccessControlPolicy;
+using Amazon.CognitoIdentity;
 
 namespace LoginSystem
 {
@@ -18,7 +19,6 @@ namespace LoginSystem
     {
         private Button mBtnSignUp;
         private ProgressBar mProgressBar;
-        CognitoSyncManager syncManager = new CognitoSyncManager(credentials, RegionEndpoint.CACentral1);
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,6 +27,10 @@ namespace LoginSystem
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
+            /*CognitoAWSCredentials credentials = new CognitoAWSCredentials(
+                "us-east-1:a205f4ac-4f87-49d6-b913-911e4eccb852", // Your identity pool ID
+                RegionEndpoint.USEast1 // Region
+            );
             var loggingConfig = AWSConfigs.LoggingConfig;
             loggingConfig.LogMetrics = true;
             loggingConfig.LogResponses = ResponseLoggingOption.Always;
@@ -34,9 +38,11 @@ namespace LoginSystem
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
 
             //location of the device running
-            AWSConfigs.AWSRegion = "ca-central-1";
+            AWSConfigs.AWSRegion = "us-east-1";
             //time difference between 
             AWSConfigs.CorrectForClockSkew = true;
+
+            CognitoSyncManager syncManager = new CognitoSyncManager(credentials, RegionEndpoint.USEast1);*/
 
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
