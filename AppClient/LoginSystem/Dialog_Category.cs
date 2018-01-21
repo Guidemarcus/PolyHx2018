@@ -15,13 +15,10 @@ namespace LoginSystem
     class Dialog_Category : DialogFragment
     {
         private ListView sousSectionListView;
-        Menu sousSection;
+        private Menu sousSection;
         private int position;
         private MainClientActivity clientActivityTemp;
         private Button btnDismiss;
-        private Button btnPlus;
-        private Button btnMinus;
-        private TextView nbFood;
 
         public Dialog_Category(int position, MainClientActivity mainClientActivity)
         {
@@ -39,31 +36,8 @@ namespace LoginSystem
             sousSectionListView = view.FindViewById<ListView>(Resource.Id.listViewSousSection);
             sousSectionListView.Adapter = new CategoryItemsAdapter(clientActivityTemp, sousSection.getMyMenu(position));
             btnDismiss = view.FindViewById<Button>(Resource.Id.dismiss);
-            btnDismiss.Click += BtnDismiss_Click;
-            btnPlus = accessMenuView.FindViewById<Button>(Resource.Id.btnPlus);
-            btnPlus.Click += BtnPlus_Click;
-            btnMinus = accessMenuView.FindViewById<Button>(Resource.Id.btnMinus);
-            btnMinus.Click += BtnMinus_Click;
-            nbFood = accessMenuView.FindViewById<TextView>(Resource.Id.nbCount);
+            btnDismiss.Click += BtnDismiss_Click;            
             return view;
-        }
-
-        private void BtnMinus_Click(object sender, EventArgs e)
-        {
-            if(Int32.Parse(nbFood.Text) > 0)
-            {
-                int temp = Int32.Parse(nbFood.Text);
-                temp--;
-                nbFood.Text = temp + "";
-            }
-        }
-
-        private void BtnPlus_Click(object sender, EventArgs e)
-        {
-            int temp = Int32.Parse(nbFood.Text);
-            temp++;
-            nbFood.Text = temp + "";
-            Console.WriteLine();
         }
 
         private void BtnDismiss_Click(object sender, EventArgs e)

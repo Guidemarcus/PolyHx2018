@@ -46,6 +46,25 @@ namespace LoginSystem
             {
                 row = LayoutInflater.From(myContext).Inflate(Resource.Layout.SubdivisionItem, null, false);
             }
+            TextView nbFood = row.FindViewById<TextView>(Resource.Id.nbCount);
+            Button btnPlus = row.FindViewById<Button>(Resource.Id.btnPlus);
+            btnPlus.Click += (object sender, EventArgs e) =>
+                {
+                    int temp = int.Parse(nbFood.Text);
+                    temp++;
+                    nbFood.Text = temp.ToString();
+                };
+            Button btnMinus = row.FindViewById<Button>(Resource.Id.btnMinus);
+            btnMinus.Click += (object sender, EventArgs e) =>
+                {
+                    if (Int32.Parse(nbFood.Text) > 0)
+                    {
+                        int temp = Int32.Parse(nbFood.Text);
+                        temp--;
+                        nbFood.Text = temp.ToString();
+                    }
+                };
+
             TextView text = row.FindViewById<TextView>(Resource.Id.item);
             text.Text = myItems[position];
 

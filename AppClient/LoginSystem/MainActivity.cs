@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button mBtnSignUp;
@@ -69,7 +69,7 @@ namespace LoginSystem
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
 
-            mBtnSignUp.Click += (object sender, EventArgs args) =>
+            mBtnSignUp.Click += async  (object sender, EventArgs args) =>
                 {
                     //Pull up dialog
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
@@ -78,16 +78,16 @@ namespace LoginSystem
 
                     signUpDialog.mOnSignUpComplete += signUpDialog_mOnSignUpComplete;
 
-                    //AmazonLambdaClient client = new AmazonLambdaClient("AKIAITJEMMXZ4QGR24QA", "erXMlPHJ+8n6lQjlPWJNfF0xAnChWluM9MGJtd5y", RegionEndpoint.USEast1);
+                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAITJEMMXZ4QGR24QA", "erXMlPHJ+8n6lQjlPWJNfF0xAnChWluM9MGJtd5y", RegionEndpoint.USEast1);
 
-                    //    InvokeRequest ir = new InvokeRequest
-                    //    {
-                    //        FunctionName = "Test_2",
-                    //        InvocationType = InvocationType.RequestResponse,
-                    //        Payload = "\"tous des lettres majuscules\""
-                    //    };
+                        InvokeRequest ir = new InvokeRequest
+                        {
+                            FunctionName = "Test_2",
+                            InvocationType = InvocationType.RequestResponse,
+                            Payload = "\"tous des lettres majuscules\""
+                        };
 
-                    //    InvokeResponse response = await client.InvokeAsync(ir);
+                        InvokeResponse response = await client.InvokeAsync(ir);
 
                     var sr = new StreamReader(response.Payload, System.Text.Encoding.UTF8);
                     string responseString = sr.ReadToEnd();
@@ -95,7 +95,6 @@ namespace LoginSystem
                     var softheonAccess = JsonConvert.DeserializeAnonymousType(responseString, definition);
 
                     Console.WriteLine(softheonAccess.access_token);
-                };
 
                     //Console.WriteLine(op);
                     //Console.ReadLine();
@@ -107,6 +106,7 @@ namespace LoginSystem
             mProgressBar.Visibility = ViewStates.Visible;
             Thread thread = new Thread(ActLikeARequest);
             thread.Start();
+            StartActivity(typeof(MainClientActivity));
         }
        
         private void ActLikeARequest()
