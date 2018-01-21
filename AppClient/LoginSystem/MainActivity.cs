@@ -11,6 +11,11 @@ using Amazon.CognitoSync.SyncManager;
 using Amazon.CognitoSync;
 using Amazon.Auth.AccessControlPolicy;
 using Amazon.CognitoIdentity;
+using Amazon.Lambda;
+using Amazon.Lambda.Model;
+using System.IO;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace LoginSystem
 {
@@ -30,15 +35,13 @@ namespace LoginSystem
                 RegionEndpoint.USEast1 // Region
             );
 
-
             // creating syncmanager
             CognitoSyncManager syncManager = new CognitoSyncManager(
             credentials,
             new AmazonCognitoSyncConfig
             {
             RegionEndpoint = RegionEndpoint.USEast1 // Region
-            }
-            );
+            });
 
             // create local dataset
             Dataset dataset = syncManager.OpenOrCreateDataset("omniwallet_user");
@@ -60,7 +63,7 @@ namespace LoginSystem
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
 
-            mBtnSignUp.Click += (object sender, EventArgs args) =>
+            mBtnSignUp.Click += async (object sender, EventArgs args) =>
                 {
                     //Pull up dialog
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
@@ -68,12 +71,31 @@ namespace LoginSystem
                     signUpDialog.Show(transaction, "dialog fragment");
 
                     signUpDialog.mOnSignUpComplete += signUpDialog_mOnSignUpComplete;
-                };
+
+                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAJNCHGN3K4RPYJZ2A", "erXMlPHJ+8n6lQjlPWJNfF0xAnChWluM9MGJtd5y", RegionEndpoint.USEast1);
+
+                    InvokeRequest ir = new InvokeRequest
+                    {
+                        FunctionName = "Test_2",
+                        InvocationType = InvocationType.RequestResponse,
+                        Payload = "\"tous des lettres majuscules\""
+                    };
+
+                    InvokeResponse response = await client.InvokeAsync(ir);
+
+                    var sr = new StreamReader(response.Payload);
+                    JsonReader reader = new JsonTextReader(sr);
+
+                    var serilizer = new JsonSerializer();
+                    var op = serilizer.Deserialize(reader);
+
+                    Console.WriteLine(op);
+                    Console.ReadLine();
+                };            
         }
 
         void signUpDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
         {
-
             mProgressBar.Visibility = ViewStates.Visible;
             Thread thread = new Thread(ActLikeARequest);
             thread.Start();
@@ -83,10 +105,8 @@ namespace LoginSystem
        
         private void ActLikeARequest()
         {
-            Thread.Sleep(3000);
-
             RunOnUiThread(() => { mProgressBar.Visibility = ViewStates.Invisible; });
-            int x = Resource.Animation.slide_right;
+            int x = Resource.Animation.slide_right;            
         }
         void SyncSuccessCallback(object sender, SyncSuccessEventArgs e)
         {
