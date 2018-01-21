@@ -92,6 +92,12 @@
     <Reference Include="Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
       <HintPath>..\packages\Validation.2.0.6.15003\lib\portable-net40+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Validation.dll</HintPath>
     </Reference>
+    <Reference Include="AWSSDK.CognitoIdentityProvider">
+      <HintPath>..\packages\AWSSDK.CognitoIdentityProvider.3.3.8\lib\MonoAndroid10\AWSSDK.CognitoIdentityProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Extensions.CognitoAuthentication">
+      <HintPath>..\packages\AWSSDK.Extensions.CognitoAuthentication.0.9.1\lib\netstandard1.3\AWSSDK.Extensions.CognitoAuthentication.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryItemsAdapter.cs" />
@@ -112,18 +118,10 @@
     <AndroidResource Include="Resources\layout\dialog_sign_up.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\MenuLayout.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\MenuListCategory.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SubdivisionItem.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SubdivisionCategory.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MenuLayout.axml" />
+    <AndroidResource Include="Resources\layout\MenuListCategory.axml" />
+    <AndroidResource Include="Resources\layout\SubdivisionCategory.axml" />
+    <AndroidResource Include="Resources\layout\SubdivisionItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />

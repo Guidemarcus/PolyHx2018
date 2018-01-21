@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "LoginSystem", MainLauncher = false, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button mBtnSignUp;
@@ -39,6 +39,7 @@ namespace LoginSystem
                 "us-east-1:a205f4ac-4f87-49d6-b913-911e4eccb852",    // Cognito Identity Pool ID
                 RegionEndpoint.USEast1 // Region
             );
+
 
             // creating syncmanager
             CognitoSyncManager syncManager = new CognitoSyncManager(
@@ -68,7 +69,7 @@ namespace LoginSystem
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
 
-            mBtnSignUp.Click += async (object sender, EventArgs args) =>
+            mBtnSignUp.Click += (object sender, EventArgs args) =>
                 {
                     //Pull up dialog
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
@@ -77,16 +78,16 @@ namespace LoginSystem
 
                     signUpDialog.mOnSignUpComplete += signUpDialog_mOnSignUpComplete;
 
-                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAJIXA4JFDCVNHYM2Q", "H1pKNZo2wj64GMItcj0wKheaKYabYjSPIKXpR91Q", RegionEndpoint.USEast1);
+                    //AmazonLambdaClient client = new AmazonLambdaClient("AKIAITJEMMXZ4QGR24QA", "erXMlPHJ+8n6lQjlPWJNfF0xAnChWluM9MGJtd5y", RegionEndpoint.USEast1);
 
-                    InvokeRequest ir = new InvokeRequest
-                    {
-                        FunctionName = "Test_2",
-                        InvocationType = InvocationType.RequestResponse,
-                        Payload = "\"tous des lettres majuscules\""
-                    };
+                    //    InvokeRequest ir = new InvokeRequest
+                    //    {
+                    //        FunctionName = "Test_2",
+                    //        InvocationType = InvocationType.RequestResponse,
+                    //        Payload = "\"tous des lettres majuscules\""
+                    //    };
 
-                    InvokeResponse response = await client.InvokeAsync(ir);
+                    //    InvokeResponse response = await client.InvokeAsync(ir);
 
                     var sr = new StreamReader(response.Payload, System.Text.Encoding.UTF8);
                     string responseString = sr.ReadToEnd();
@@ -96,6 +97,9 @@ namespace LoginSystem
                     Console.WriteLine(softheonAccess.access_token);
                 };
 
+                    //Console.WriteLine(op);
+                    //Console.ReadLine();
+                };            
         }
 
         void signUpDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
