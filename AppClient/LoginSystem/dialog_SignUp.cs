@@ -100,6 +100,7 @@ namespace LoginSystem
             if (response.AuthenticationResult != null)
             {
                 Console.WriteLine("Liiiit");
+                ConnectedUser.AWSAccessToken = response.AuthenticationResult.AccessToken;
             }
         }
     }
