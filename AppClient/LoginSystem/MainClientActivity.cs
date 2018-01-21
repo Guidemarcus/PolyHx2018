@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "LoginSystem", MainLauncher = false, Icon = "@drawable/icon")]
     public class MainClientActivity : Activity
     {
         private List<string> categories;

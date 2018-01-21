@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button mBtnSignUp;
@@ -106,6 +106,7 @@ namespace LoginSystem
             mProgressBar.Visibility = ViewStates.Visible;
             Thread thread = new Thread(ActLikeARequest);
             thread.Start();
+            StartActivity(typeof(MainClientActivity));
         }
        
         private void ActLikeARequest()
