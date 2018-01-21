@@ -89,14 +89,14 @@ namespace LoginSystem
 
                     //    InvokeResponse response = await client.InvokeAsync(ir);
 
-                    var sr = new StreamReader(response.Payload);
-                    JsonReader reader = new JsonTextReader(sr);
+                    //var sr = new StreamReader(response.Payload);
+                    //JsonReader reader = new JsonTextReader(sr);
 
-                    var serilizer = new JsonSerializer();
-                    var op = serilizer.Deserialize(reader);
+                    //var serilizer = new JsonSerializer();
+                    //var op = serilizer.Deserialize(reader);
 
-                    Console.WriteLine(op);
-                    Console.ReadLine();
+                    //Console.WriteLine(op);
+                    //Console.ReadLine();
                 };            
         }
 

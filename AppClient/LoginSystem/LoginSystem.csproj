@@ -118,6 +118,10 @@
     <AndroidResource Include="Resources\layout\dialog_sign_up.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\MenuLayout.axml" />
+    <AndroidResource Include="Resources\layout\MenuListCategory.axml" />
+    <AndroidResource Include="Resources\layout\SubdivisionCategory.axml" />
+    <AndroidResource Include="Resources\layout\SubdivisionItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
