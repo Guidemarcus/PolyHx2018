@@ -3,41 +3,34 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <LinearLayout
-        android:orientation="horizontal"
+    android:weightSum="100">
+    <TextView
+        android:text="Catégorie"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="20"
-        android:id="@+id/linearLayout1">
-        <TextView
-            android:text="MTL Wallet - Restaurant"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/title"
-            android:layout_gravity="center"
-            android:paddingLeft="55dp" />
-    </LinearLayout>
+        android:id="@+id/categoryTitle"
+        android:paddingLeft="105dp"
+        android:paddingTop="30dp"
+        android:layout_weight="20" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="60"
-        android:id="@+id/listViewCateg" />
-  <Button
-        android:text="Fin des achats"
+        android:id="@+id/listViewSousSection"
+        android:layout_weight="60" />
+    <Button
+        android:text="Fermer la section"
         android:textSize="20dp"
         android:textColor="#000000"
-        android:background="#01DF01"
+        android:background="@drawable/ButtonDismissStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-        android:id="@+id/submit"
+        android:id="@+id/dismiss"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"

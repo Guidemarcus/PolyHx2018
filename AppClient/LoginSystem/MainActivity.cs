@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "LoginSystem", MainLauncher = false)]
     public class MainActivity : Activity
     {
         private Button mBtnSignUp;
@@ -57,7 +57,7 @@ namespace LoginSystem
 
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.MenuListCategory);
 
 
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
@@ -91,7 +91,7 @@ namespace LoginSystem
 
                     Console.WriteLine(op);
                     Console.ReadLine();
-                };            
+                };         
         }
 
         void signUpDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
