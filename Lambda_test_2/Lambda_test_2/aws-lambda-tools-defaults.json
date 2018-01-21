@@ -13,7 +13,7 @@
     "function-runtime" : "dotnetcore2.0",
     "function-memory-size" : 256,
     "function-timeout"     : 30,
-    "function-handler"     : "Lambda_test_2::Lambda_test_2.Function::toUpper",
+    "function-handler"     : "Lambda_test_2::Lambda_test_2.Function::getSoftheonAccessToken",
     "function-name"        : "Test_2",
     "function-role"        : "arn:aws:iam::466043284444:role/lambda_exec_Test_2",
     "environment-variables" : ""

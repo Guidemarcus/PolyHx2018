@@ -15,15 +15,20 @@ using Amazon.Lambda;
 using Amazon.Lambda.Model;
 using System.IO;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = false)]
+    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button mBtnSignUp;
         private ProgressBar mProgressBar;
+
+        private static HttpClient client = new HttpClient();
+
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -57,7 +62,7 @@ namespace LoginSystem
 
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.MenuListCategory);
+            SetContentView(Resource.Layout.Main);
 
 
             mBtnSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
@@ -72,7 +77,7 @@ namespace LoginSystem
 
                     signUpDialog.mOnSignUpComplete += signUpDialog_mOnSignUpComplete;
 
-                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAJNCHGN3K4RPYJZ2A", "erXMlPHJ+8n6lQjlPWJNfF0xAnChWluM9MGJtd5y", RegionEndpoint.USEast1);
+                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAJIXA4JFDCVNHYM2Q", "H1pKNZo2wj64GMItcj0wKheaKYabYjSPIKXpR91Q", RegionEndpoint.USEast1);
 
                     InvokeRequest ir = new InvokeRequest
                     {
@@ -84,15 +89,14 @@ namespace LoginSystem
                     InvokeResponse response = await client.InvokeAsync(ir);
 
                     var sr = new StreamReader(response.Payload);
-                    JsonReader reader = new JsonTextReader(sr);
+                    string responseString = sr.ReadToEnd();
+                    var definition = new { access_token = "", expires_in = 0, token_type = "" };
+                    var softheonAccess = JsonConvert.DeserializeAnonymousType(responseString, definition);
 
-                    var serilizer = new JsonSerializer();
-                    var op = serilizer.Deserialize(reader);
-
-                    Console.WriteLine(op);
+                    Console.WriteLine(softheonAccess.access_token);
                     Console.ReadLine();
-                };         
-        }
+                };            
+        
 
         void signUpDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
         {

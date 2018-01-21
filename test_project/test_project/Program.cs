@@ -1,30 +1,16 @@
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net.Http;
-
-using Amazon.Lambda.Core;
-using System.Net.Http.Headers;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
-// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-
-namespace Lambda_test_2
+namespace test_project
 {
-    public class Function
+    class Program
     {
-
-
-
-        /// <summary>
-        /// A simple function that takes a string and does a ToUpper
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static async Task<string> getSoftheonAccessToken(string input, ILambdaContext context)
+        static void Main(string[] args)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -43,7 +29,12 @@ namespace Lambda_test_2
             StreamReader readStream = new StreamReader(receiveStream.Result, System.Text.Encoding.UTF8);
             string responseText = readStream.ReadToEnd();
 
-            return responseText;
+            var definition = new { access_token = "", expires_in = "", token_type = ""};
+
+            var lolol = JsonConvert.DeserializeAnonymousType(responseText, definition);
+
+            Console.Write(responseText);
+            Console.ReadLine();
         }
     }
 }
