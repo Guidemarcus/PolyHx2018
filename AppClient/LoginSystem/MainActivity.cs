@@ -15,6 +15,8 @@ using Amazon.Lambda;
 using Amazon.Lambda.Model;
 using System.IO;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
 namespace LoginSystem
@@ -24,6 +26,9 @@ namespace LoginSystem
     {
         private Button mBtnSignUp;
         private ProgressBar mProgressBar;
+
+        private static HttpClient client = new HttpClient();
+
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -41,7 +46,7 @@ namespace LoginSystem
             credentials,
             new AmazonCognitoSyncConfig
             {
-            RegionEndpoint = RegionEndpoint.USEast1 // Region
+                RegionEndpoint = RegionEndpoint.USEast1 // Region
             });
 
             // create local dataset
@@ -84,13 +89,14 @@ namespace LoginSystem
 
                     //    InvokeResponse response = await client.InvokeAsync(ir);
 
-                    //    var sr = new StreamReader(response.Payload);
+                    var sr = new StreamReader(response.Payload);
+                    JsonReader reader = new JsonTextReader(sr);
 
-                    //    var serilizer = new JsonSerializer();
-                    //    var op = serilizer.Deserialize(reader);
+                    var serilizer = new JsonSerializer();
+                    var op = serilizer.Deserialize(reader);
 
-                    //     Console.WriteLine(op);
-                    //     Console.ReadLine();
+                    Console.WriteLine(op);
+                    Console.ReadLine();
                 };            
         }
 
@@ -99,8 +105,6 @@ namespace LoginSystem
             mProgressBar.Visibility = ViewStates.Visible;
             Thread thread = new Thread(ActLikeARequest);
             thread.Start();
-    
-
         }
        
         private void ActLikeARequest()

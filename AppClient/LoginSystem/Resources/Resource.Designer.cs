@@ -36,10 +36,16 @@ namespace LoginSystem
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int slide_right = 2130968576;
+			public const int slide_down = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int slide_up = 2130968577;
+			public const int slide_right = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int slide_up = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int slide_up_gone = 2130968579;
 			
 			static Animation()
 			{
@@ -71,19 +77,28 @@ namespace LoginSystem
 			public const int ButtonSignInStyle = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int ButtonSignUpStyle = 2130837505;
+			public const int ButtonDismissStyle = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int edit_text_style = 2130837506;
+			public const int ButtonSignInStyle = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Icon = 2130837507;
+			public const int ButtonSignUpStyle = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int mail = 2130837508;
+			public const int CategoriesStyle = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int ProgressBarStyle = 2130837509;
+			public const int edit_text_style = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int Icon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int mail = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int ProgressBarStyle = 2130837512;
 			
 			static Drawable()
 			{
@@ -101,14 +116,26 @@ namespace LoginSystem
 			// aapt resource value: 0x7f070003
 			public const int btnDialogEmail = 2131165187;
 			
+			// aapt resource value: 0x7f070012
+			public const int btnMinus = 2131165202;
+			
+			// aapt resource value: 0x7f070014
+			public const int btnPlus = 2131165204;
+			
 			// aapt resource value: 0x7f070005
 			public const int btnSignIn = 2131165189;
 			
 			// aapt resource value: 0x7f070007
 			public const int btnSignUp = 2131165191;
 			
+			// aapt resource value: 0x7f070009
+			public const int linearLayout1 = 2131165193;
+			
 			// aapt resource value: 0x7f070008
 			public const int progressBar1 = 2131165192;
+			
+			// aapt resource value: 0x7f07000a
+			public const int title = 2131165194;
 			
 			// aapt resource value: 0x7f070004
 			public const int txtCreateAccount = 2131165188;
@@ -144,6 +171,12 @@ namespace LoginSystem
 			// aapt resource value: 0x7f030001
 			public const int Main = 2130903041;
 			
+			// aapt resource value: 0x7f030002
+			public const int MenuLayout = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int MenuListCategory = 2130903043;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -177,7 +210,10 @@ namespace LoginSystem
 		{
 			
 			// aapt resource value: 0x7f060000
-			public const int dialog_animation = 2131099648;
+			public const int category_animation = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int dialog_animation = 2131099649;
 			
 			static Style()
 			{
