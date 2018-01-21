@@ -45,7 +45,7 @@ namespace LoginSystem
             credentials,
             new AmazonCognitoSyncConfig
             {
-            RegionEndpoint = RegionEndpoint.USEast1 // Region
+                RegionEndpoint = RegionEndpoint.USEast1 // Region
             });
 
             // create local dataset
@@ -95,16 +95,15 @@ namespace LoginSystem
 
                     Console.WriteLine(softheonAccess.access_token);
                     Console.ReadLine();
-                };            
-        
+                };
+
+        }
 
         void signUpDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
         {
             mProgressBar.Visibility = ViewStates.Visible;
             Thread thread = new Thread(ActLikeARequest);
             thread.Start();
-    
-
         }
        
         private void ActLikeARequest()
