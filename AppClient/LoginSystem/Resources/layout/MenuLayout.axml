@@ -29,11 +29,11 @@
         android:layout_height="0dp"
         android:layout_weight="60"
         android:id="@+id/listViewCateg" />
-  <Button
+    <Button
         android:text="Fin des achats"
         android:textSize="20dp"
         android:textColor="#000000"
-        android:background="#01DF01"
+        android:background="@drawable/ButtonDismissStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"

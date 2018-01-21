@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 
 namespace LoginSystem
 {
-    [Activity(Label = "LoginSystem", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "LoginSystem", MainLauncher = false, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private Button mBtnSignUp;
