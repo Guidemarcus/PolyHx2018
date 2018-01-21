@@ -7,6 +7,7 @@ using System.Net.Http;
 using Amazon.Lambda.Core;
 using System.Net.Http.Headers;
 using System.IO;
+using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -24,7 +25,7 @@ namespace Lambda_test_2
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static async Task<string> getSoftheonAccessToken(string input, ILambdaContext context)
+        public static async Task<object> getSoftheonAccessToken(string input, ILambdaContext context)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -38,12 +39,14 @@ namespace Lambda_test_2
             Task<HttpResponseMessage> response = client.PostAsync("https://hack.softheon.io/oauth2/connect/token", content);
             response.Wait();
 
-            Task<Stream> receiveStream = response.Result.Content.ReadAsStreamAsync();
-            receiveStream.Wait();
-            StreamReader readStream = new StreamReader(receiveStream.Result, System.Text.Encoding.UTF8);
+            Stream receiveStream = await response.Result.Content.ReadAsStreamAsync();
+            StreamReader readStream = new StreamReader(receiveStream, System.Text.Encoding.UTF8);
             string responseText = readStream.ReadToEnd();
 
-            return responseText;
+            var definition = new { access_token = "", expires_in = "", token_type = "" };
+            var obj = JsonConvert.DeserializeAnonymousType(responseText, definition);
+
+            return obj;
         }
     }
 }

@@ -88,13 +88,12 @@ namespace LoginSystem
 
                     InvokeResponse response = await client.InvokeAsync(ir);
 
-                    var sr = new StreamReader(response.Payload);
+                    var sr = new StreamReader(response.Payload, System.Text.Encoding.UTF8);
                     string responseString = sr.ReadToEnd();
-                    var definition = new { access_token = "", expires_in = 0, token_type = "" };
+                    var definition = new { access_token = "", expires_in = "", token_type = "" };
                     var softheonAccess = JsonConvert.DeserializeAnonymousType(responseString, definition);
 
                     Console.WriteLine(softheonAccess.access_token);
-                    Console.ReadLine();
                 };
 
         }
