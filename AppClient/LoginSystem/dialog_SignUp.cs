@@ -10,6 +10,22 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using System.Threading;
+using System.Configuration;
+using Amazon;
+using Amazon.CognitoSync.SyncManager;
+using Amazon.CognitoSync;
+using Amazon.Auth.AccessControlPolicy;
+using Amazon.CognitoIdentity;
+using System.IO;
+using System.Threading.Tasks;
+using Amazon.Lambda;
+using Amazon.Lambda.Model;
+using Newtonsoft.Json;
+using Amazon.CognitoIdentityProvider;
+using PCLAppConfig;
+using System.Windows.Markup;
+
 namespace LoginSystem
 {
     public class OnSignUpEventArgs : EventArgs
@@ -46,11 +62,22 @@ namespace LoginSystem
 
     class dialog_SignUp : DialogFragment
     {
+        
         private EditText mTxtFirstName;
         private EditText mTxtEmail;
         private EditText mTxtPassword;
         private Button mBtnSignUp;
 
+        private string _clientId = ConfigurationManager.AppSettings["CLIENT_ID"];
+        private string _poolId = ConfigurationManager.AppSettings["USERPOOL_ID"];
+        private AmazonCognitoIdentityProviderClient _client;
+
+        public void SignUp(AmazonCognitoIdentityProviderClient client)
+        {
+            //InitializeComponent();
+
+            _client = client;
+        }
         public event EventHandler<OnSignUpEventArgs> mOnSignUpComplete;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

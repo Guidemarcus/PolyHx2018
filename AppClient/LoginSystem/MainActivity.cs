@@ -6,16 +6,20 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.Threading;
+using System.Configuration;
 using Amazon;
 using Amazon.CognitoSync.SyncManager;
 using Amazon.CognitoSync;
 using Amazon.Auth.AccessControlPolicy;
 using Amazon.CognitoIdentity;
-using Amazon.Lambda;
-using Amazon.Lambda.Model;
 using System.IO;
 using System.Threading.Tasks;
+using Amazon.Lambda;
+using Amazon.Lambda.Model;
 using Newtonsoft.Json;
+using Amazon.CognitoIdentityProvider;
+using PCLAppConfig;
+using System.Windows.Markup;
 
 namespace LoginSystem
 {
@@ -24,16 +28,22 @@ namespace LoginSystem
     {
         private Button mBtnSignUp;
         private ProgressBar mProgressBar;
+        private AmazonCognitoIdentityProviderClient _client;
+        private string _clientId = ConfigurationManager.AppSettings["CLIENT_ID"];
+        private string _poolId = ConfigurationManager.AppSettings["USERPOOL_ID"];
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
 
             // getting credentials
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
                 "us-east-1:a205f4ac-4f87-49d6-b913-911e4eccb852",    // Cognito Identity Pool ID
                 RegionEndpoint.USEast1 // Region
             );
+
+            this._client = new AmazonCognitoIdentityProviderClient(credentials);
 
             // creating syncmanager
             CognitoSyncManager syncManager = new CognitoSyncManager(
