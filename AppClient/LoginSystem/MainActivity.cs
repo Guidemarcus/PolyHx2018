@@ -78,7 +78,7 @@ namespace LoginSystem
 
                     signUpDialog.mOnSignUpComplete += signUpDialog_mOnSignUpComplete;
 
-                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAITJEMMXZ4QGR24QA", "erXMlPHJ+8n6lQjlPWJNfF0xAnChWluM9MGJtd5y", RegionEndpoint.USEast1);
+                    AmazonLambdaClient client = new AmazonLambdaClient("AKIAJIXA4JFDCVNHYM2Q", "H1pKNZo2wj64GMItcj0wKheaKYabYjSPIKXpR91Q", RegionEndpoint.USEast1);
 
                         InvokeRequest ir = new InvokeRequest
                         {
